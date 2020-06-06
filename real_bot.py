@@ -3,12 +3,14 @@ from discord.ext    import commands
 from discord.ext.commands   import Bot
 import asyncio
 
+# ön ek
 bot = commands.Bot(command_prefix = 'sau')
 
 @bot.event
 async def on_ready():
     print('bot is ready')
 
+# log
 @bot.event
 async def on_member_join(member):
     channel = bot.get_channel(717402901017788417)
@@ -18,6 +20,7 @@ async def on_member_join(member):
 
     await channel.send(f'{member.mention} sunucuya katıldı 🤙 Üye sayısı: {lst}')
 
+# log
 @bot.event
 async def on_member_remove(member):
     channel = bot.get_channel(717402901017788417)
@@ -29,6 +32,7 @@ async def on_member_remove(member):
     
 
 
+#sorular
 @bot.event
 async def on_message(message):
     if message.channel.id == 716895157194194984 or message.channel.id == 717708011602313276 or message.channel.id == 717746193186422825:
@@ -39,7 +43,7 @@ async def on_message(message):
         await message.add_reaction("🇪")
 
 
-
+# toplu mesaj silme
     if message.content.startswith('sausil'):
         if message.author.permissions_in(message.channel).manage_messages:
             args = message.content.split(' ')
@@ -50,6 +54,8 @@ async def on_message(message):
                     await message.channel.send('{} mesaj silindi'.format(len(deleted)-1))
 
 
+
+# dogrulama
 @bot.event
 async def on_raw_reaction_add(payload):
     message_id = payload.message_id
@@ -69,7 +75,7 @@ async def on_raw_reaction_add(payload):
 
 
 
-
+# dogrulama
 @bot.event
 async def on_raw_reaction_remove(payload):
     message_id = payload.message_id
