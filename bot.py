@@ -15,8 +15,8 @@ bot = commands.Bot(command_prefix = 'sau')
 @bot.event
 async def on_ready():
     print('bot is ready')
-
-
+    # Setting `Playing ` status
+    await bBot.change_presence(type=discord.ActivityType.watching,name="SAU VFT")
 
 
 # Kullanıcı sunucuya katıldığında belirlenen ID'ye sahip kanala 
@@ -111,4 +111,5 @@ async def on_raw_reaction_remove(payload):
                 
                 
 # Son olarak bot tokeninizi girip botu çalıştırabilirsiniz
-bot.run('YOUR_TOKEN')
+bot.run('NzA5MjAzNjIwMzczMDY5ODY2.Xt1mEQ.eKV-DxmPnOBvdh1R-uHjvAU9bRg')
+                          
