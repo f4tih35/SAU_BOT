@@ -5,8 +5,8 @@ import asyncio
 
 # ön ek
 bot = commands.Bot(command_prefix = 'sau')
-SORU_DOGRULUK_ORANI=93 # %93 Oraninda 1 ssecenegin on plana cikmasi gerekiyor
-VERILEN_OY_SINIRI=30   # En az 30 oy kullanilmasi gerekiyor
+SORU_DOGRULUK_ORANI=10 # %93 Oraninda 1 ssecenegin on plana cikmasi gerekiyor
+VERILEN_OY_SINIRI=1   # En az 30 oy kullanilmasi gerekiyor
 class Soru():
     def __init__(self):
         self.soru = [[1000000000000,1,1,1,1,1]]
@@ -49,12 +49,14 @@ class Soru():
                     new_rate = (answers[1]/total_reaction_counts)*100
                     if max_percent_reaction[2] < new_rate:
                         max_percent_reaction = answers[0],answers[1],new_rate
-        if total_reaction_counts > 2:
+        """
+        if total_reaction_counts >= 2:
             print(max_percent_reaction[2])
             if max_percent_reaction[2] > ((total_reaction_counts*10)/100): # %80 den fazlasi dogru sikki ayni dusunuyorsa
                 print("Maksimum Secenek Yuzdesi:")
                 print(max_percent_reaction)
-                return max_percent_reaction
+        """
+        return max_percent_reaction
     def soru_ekle(self,message_id,count_a,count_b,count_c,count_d,count_e):    
         self.soru.append([message_id, count_a, count_b, count_c, count_d, count_e])
 
@@ -89,7 +91,8 @@ async def on_member_remove(member):
 #sorular
 @bot.event
 async def on_message(message):
-    if message.channel.id == 716895157194194984 or message.channel.id == 717708011602313276 or message.channel.id == 717746193186422825:
+    message_id=message.id
+    if message.channel.id == 716895157194194984 or message.channel.id == 717708011602313276 or message.channel.id == 717746193186422825 :
         await message.add_reaction("🇦")
         await message.add_reaction("🇧")
         await message.add_reaction("🇨")
@@ -119,8 +122,8 @@ async def on_raw_reaction_add(payload):
     message = await channel.fetch_message(message_id)
     soru.soru_secenekleri_say(message)
     durum=soru.soru_analiz(message_id)
-    if durum is not None and durum[2] > VERILEN_OY_SINIRI and durum[1] > SORU_DOGRULUK_ORANI:
-         await message.add_reaction("✅")
+    if durum[1] > VERILEN_OY_SINIRI and durum[2] > SORU_DOGRULUK_ORANI:
+        await message.add_reaction("✅")
     if message_id == 717786402728837120:
         guild_id = payload.guild_id
         guild = discord.utils.find(lambda g : g.id == guild_id, bot.guilds)
@@ -146,8 +149,8 @@ async def on_raw_reaction_remove(payload):
     message = await channel.fetch_message(message_id)
     soru.soru_secenekleri_say(message)
     durum=soru.soru_analiz(message_id)
-    if durum is not None and durum[2] > VERILEN_OY_SINIRI and durum[1] > SORU_DOGRULUK_ORANI:
-         await message.add_reaction("✅")
+    if durum[1] > VERILEN_OY_SINIRI and durum[2] > SORU_DOGRULUK_ORANI:
+        await message.add_reaction("✅")
     if message_id == 717786402728837120:
         guild_id = payload.guild_id
         guild = discord.utils.find(lambda g : g.id == guild_id, bot.guilds)
