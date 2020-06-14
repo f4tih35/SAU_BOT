@@ -111,5 +111,5 @@ async def on_raw_reaction_remove(payload):
                 
                 
 # Son olarak bot tokeninizi girip botu çalıştırabilirsiniz
-bot.run('NzA5MjAzNjIwMzczMDY5ODY2.Xt1mEQ.eKV-DxmPnOBvdh1R-uHjvAU9bRg')
+bot.run('TOKEN')
                           
