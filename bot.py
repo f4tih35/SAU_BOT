@@ -70,7 +70,7 @@ async def on_message(message):
 
 
 
-# belirlenen mesaj id'sinde belirlenen bir emojiye basıldığında belirtilen rol verilir. bkz. satır 77-81-83
+# belirlenen mesaj id'sinde belirlenen bir emojiye basıldığında belirtilen rol verilir.
 @bot.event
 async def on_raw_reaction_add(payload):
     message_id = payload.message_id
@@ -89,7 +89,7 @@ async def on_raw_reaction_add(payload):
                 print('add done')
 
                 
-# belirlenen mesaj id'sinde belirlenen emojiye basılı olduğu halde tekrar basma durumunda belirtilen rol kaldırılır. bkz. satır 96-100-102
+# belirlenen mesaj id'sinde belirlenen emojiye basılı olduğu halde tekrar basma durumunda belirtilen rol kaldırılır.
 @bot.event
 async def on_raw_reaction_remove(payload):
     message_id = payload.message_id
